@@ -16,13 +16,9 @@ int count(struct pt_regs *ctx){
     }
 
     struct key_t key = {};
-    u64 zero =0, *val;
 
     bpf_probe_read(&key.c, sizeof(key.c), (void *)PT_REGS_PARM1(ctx));
-    val = counts.lookup_or_init(&key, &zero);
-    if(val){
-        (*val)++;
-    }
+    counts.increment(key);
     return 0;
 }
 """)
