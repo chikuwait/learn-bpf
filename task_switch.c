@@ -4,7 +4,7 @@
 struct key_t{
     u32 prev_pid;
     u32 curr_pid;
-}
+};
 
 BPF_HASH(stats, struct key_t, u64, 1024);
 int count_sched(struct pt_regs *ctx, struct task_struct *prev){
